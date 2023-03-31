@@ -1,0 +1,44 @@
+.main>form {
+  margin-top: calc(0px - 1rem - 0.625rem - 1px);
+
+  display: flex;
+  justify-content: center;
+  gap: .5rem;
+}
+
+.main>form>input[type=text] {
+  width: 100%;
+  max-width: 430px;
+  padding: 1rem;
+
+  font-size: 1rem;
+  color: var(--gray-100);
+  background-color: var(--gray-500);
+  border: 1px solid var(--gray-700);
+  border-radius: 8px;
+}
+
+.main>form>button[type=submit] {
+  padding: 1rem;
+
+  border: none;
+  border-radius: 8px;
+  line-height: 0;
+  color: var(--gray-100);
+  background-color: var(--blue-dark);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.main>form>button[type=submit]:hover {
+  background-color: var(--blue);
+}
+
+.main>form>button[type=submit]>span {
+  margin-left: .5rem;
+}
