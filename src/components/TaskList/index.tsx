@@ -6,17 +6,20 @@ interface TaskListProps {
 }
 
 export function TaskList({tasks}: TaskListProps) {
+  const tasksCount = tasks.length;
+  const completedTasksCount = (tasks.filter(task => task.isComplete).length);
+
   return (
     <section className={styles.taskListContainer}>
       <header className={styles.taskListHeader}>
         <div className={styles.tasksCount}>
           <p>Tarefas criadas</p>
-          <span>5</span>
+          <span>{tasksCount}</span>
         </div>
 
         <div className={styles.completedTasksCount}>
           <p>Concluídas</p>
-          <span>2 de 5</span>
+          <span>{`${completedTasksCount} de ${tasksCount}`}</span>
         </div>
       </header>
       <div className={styles.taskList}>
