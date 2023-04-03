@@ -16,48 +16,67 @@
   margin-top: 1rem;
 }
 
-.taskCheckbox {
-  appearance: none;
+.task p {
+  width: 100%;
+  line-height: 140%;
+  font-size: .875rem;
 
-  width: 1.5rem;
-  height: 1.5rem;
+  transition: color 0.15s;
 
-  cursor: pointer;
-  border-radius: 50%;
-  border: 2px solid var(--blue);
-
-  transition: box-shadow 0.2s, background-color 0.2s;
+  cursor: default;
+  user-select: none;
 }
 
-.taskCheckbox:hover {
+.taskCheckmarkArea {
+  width: 1.5rem;
+  height: 1.5rem;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.taskCheckmarkForNotCompletedOnes {
+  width: 1.090622rem;
+  height: 1.090622rem;
+
+  border: 2px solid var(--blue);
+  border-radius: 50%;
+
+  transition: border-color 0.15s, background-color 0.15s;
+}
+
+.taskCheckmarkForNotCompletedOnes:hover {
   border-color: var(--blue-dark);
   background-color: rgba(30, 111, 159, 0.15);
 }
 
-.taskCheckbox:checked {
-  border: 2px solid var(--purple-dark);
+.taskCheckmarkForCompletedOnes {
+  width: 1.090622rem;
+  height: 1.090622rem;
+
+  line-height: 0;
+  border-radius: 50%;
+  color: var(--gray-100);
   background-color: var(--purple-dark);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: background-color 0.15s;
 }
 
-.taskCheckbox:checked:hover {
-  border-color: var(--purple);
+.taskCheckmarkForCompletedOnes:hover {
   background-color: var(--purple);
 }
 
-.taskDescription {
-  width: 100%;
-
-  line-height: 140%;
-  font-size: .875rem;
+.taskDescriptionForNotCompletedOnes {
   color: var(--gray-100);
 }
 
-.taskDescriptionCompleted {
-  width: 100%;
-
-  line-height: 140%;
-  font-size: .875rem;
-  text-align: justify;
+.taskDescriptionForCompletedOnes {
   color: var(--gray-300);
   text-decoration: line-through;
 }
@@ -66,12 +85,13 @@
   width: 1.5rem;
   height: 1.5rem;
 
-  font-size: 0;
-  color: var(--gray-300);
-  border: none;
-  border-radius: 4px;
+  border: unset;
   background-color: transparent;
   cursor: pointer;
+
+  font-size: 0;
+  color: var(--gray-300);
+  border-radius: 4px;
 
   display: flex;
   align-items: center;
