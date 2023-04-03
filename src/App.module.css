@@ -1,4 +1,10 @@
-.main>form {
+.container {
+  max-width: 736px;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+.createTaskForm {
   margin-top: calc(0px - 1rem - 0.625rem - 1px);
 
   display: flex;
@@ -6,9 +12,8 @@
   gap: .5rem;
 }
 
-.main>form>input[type=text] {
+.createTaskFormInput {
   width: 100%;
-  max-width: 430px;
   padding: 1rem;
 
   font-size: 1rem;
@@ -18,7 +23,7 @@
   border-radius: 8px;
 }
 
-.main>form>button[type=submit] {
+.createTaskFormSubmitButton {
   padding: 1rem;
 
   border: none;
@@ -35,10 +40,10 @@
   transition: background-color 0.15s;
 }
 
-.main>form>button[type=submit]:hover {
+.createTaskFormSubmitButton:hover {
   background-color: var(--blue);
 }
 
-.main>form>button[type=submit]>span {
+.createTaskFormSubmitButton>span {
   margin-left: .5rem;
 }
