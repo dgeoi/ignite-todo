@@ -1,50 +1,69 @@
 import { PlusCircle } from 'phosphor-react';
+import { ChangeEvent, FormEvent, InvalidEvent, useEffect, useState } from 'react';
 import styles from './App.module.css';
 import { Header } from './components/Header';
 import { TaskShape } from './components/Task';
 import { TaskList } from './components/TaskList';
 
-const taskListFromApi: TaskShape[] = [
-  {
-    description: 'Lavar cabelo',
-    isComplete: false
-  },
-  {
-    description: 'Dar banho no cachorro',
-    isComplete: true
-  },
-  {
-    description: 'Limpar banheiro',
-    isComplete: true
-  },
-  {
-    description: 'Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.',
-    isComplete: false
-  },
-  {
-    description: 'Consectetur quia fugiat ut. Aut voluptas voluptatem incidunt perspiciatis quis odio. Voluptate aut est sunt. Expedita ut tempore rerum et dolorem aut.',
-    isComplete: false
-  },
-];
-
 export default function App() {
+  const [tasks, setTasks] = useState<TaskShape[]>([]);
+  const [createTaskDescription, setCreateTaskDescription] = useState('');
+  const isCreateTaskDescriptionEmpty = createTaskDescription.length === 0;
+
+  function handleCreateTaskDescriptionValue(event: ChangeEvent<HTMLInputElement>) {
+    event.target.setCustomValidity('');
+    setCreateTaskDescription(event.target.value);
+  }
+
+  function invalidCreateTaskDescription(event: InvalidEvent<HTMLInputElement>) {
+    event.target.setCustomValidity('Preencha este campo!');
+  }
+
+  function handleSubmitOfCreateTaskForm(event: FormEvent) {
+    event.preventDefault();
+    setTasks(previous => previous.concat([{description: createTaskDescription, isComplete: false}]));
+  }
+  
+  useEffect(() => {
+    const tasksFromLocalStorage = JSON.parse(localStorage.getItem('TASK_LIST') || '') as TaskShape[];
+    setTasks(tasksFromLocalStorage);
+  }, []);
+  
+  useEffect(() => {
+    if(createTaskDescription.length > 0) {
+      localStorage.setItem('TASK_LIST', JSON.stringify(tasks));
+      setCreateTaskDescription('');
+    }
+  }, [tasks]);
+  
   return (
     <div>
       <Header />
       <main className={styles.container}>
-        <form className={styles.createTaskForm}>
+        <form
+          className={styles.createTaskForm}
+          onSubmit={(event) => {handleSubmitOfCreateTaskForm(event);}}
+        >
           <input
+            required
             type="text"
             placeholder='Adicione uma nova tarefa'
+            value={createTaskDescription}
             className={styles.createTaskFormInput}
+            onChange={(event) => {handleCreateTaskDescriptionValue(event);}}
+            onInvalid={invalidCreateTaskDescription}
           />
-          <button type="submit" className={styles.createTaskFormSubmitButton}>
+          <button
+            type="submit"
+            className={styles.createTaskFormSubmitButton}
+            disabled={isCreateTaskDescriptionEmpty}
+          >
             Criar
             <span><PlusCircle size={16} /></span>
           </button>
         </form>
 
-        <TaskList tasks={taskListFromApi} />
+        <TaskList tasks={tasks} />
       </main>
     </div>
   );
