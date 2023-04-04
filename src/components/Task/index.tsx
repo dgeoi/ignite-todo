@@ -1,5 +1,5 @@
 import { Check, Trash } from 'phosphor-react';
-import { MouseEvent, useState } from 'react';
+import { memo } from 'react';
 import styles from './Task.module.css';
 
 export interface TaskShape {
@@ -9,20 +9,23 @@ export interface TaskShape {
 
 type TaskProps = {
   task: TaskShape
+  onTaskCompletion: (taskCompleted: TaskShape) => void
+  onDeleteTask: (taskToDelete: TaskShape) => void
 }
 
-export function Task({task}: TaskProps) {
-  const [isTaskCompleted, setIsTaskCompleted] = useState<boolean>(task.isComplete);
+export function Task({task, onTaskCompletion, onDeleteTask}: TaskProps) {
+  function handleTaskCompletion() {
+    onTaskCompletion(task);
+  }
 
-  function handleTaskCompletion(event: MouseEvent<HTMLElement>) {
-    event.preventDefault();
-    setIsTaskCompleted(previous => !previous);
+  function handleDeleteTask() {
+    onDeleteTask(task);
   }
 
   return (
     <article className={styles.task}>
-      <div className={styles.taskCheckmarkArea} onClick={(event) => {handleTaskCompletion(event);}}>
-        {isTaskCompleted ? 
+      <div className={styles.taskCheckmarkArea} onClick={handleTaskCompletion}>
+        {task.isComplete ?
           <span className={styles.taskCheckmarkForCompletedOnes}>
             <Check weight='bold' size={12} />
           </span>
@@ -31,11 +34,13 @@ export function Task({task}: TaskProps) {
         }
       </div>
 
-      <p className={isTaskCompleted ? styles.taskDescriptionForCompletedOnes : styles.taskDescriptionForNotCompletedOnes}>{task.description}</p>
+      <p className={task.isComplete ? styles.taskDescriptionForCompletedOnes : styles.taskDescriptionForNotCompletedOnes}>{task.description}</p>
 
-      <button className={styles.taskDeleteButton}>
+      <button className={styles.taskDeleteButton} onClick={() => {handleDeleteTask();}}>
         <span><Trash size={18} /></span>
       </button>
     </article>
   );
 }
+
+export default memo(Task);

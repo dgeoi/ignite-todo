@@ -1,11 +1,14 @@
-import { Task, TaskShape } from '../Task';
+import { memo } from 'react';
+import Task, { TaskShape } from '../Task';
 import styles from './TaskList.module.css';
 
 interface TaskListProps {
   tasks: TaskShape[]
+  onTaskCompletion: (taskCompleted: TaskShape) => void
+  onDeleteTask: (taskToDelete: TaskShape) => void
 }
 
-export function TaskList({tasks}: TaskListProps) {
+function TaskList({tasks, onTaskCompletion, onDeleteTask}: TaskListProps) {
   const tasksCount = tasks.length;
   const completedTasksCount = (tasks.filter(task => task.isComplete).length);
 
@@ -24,9 +27,16 @@ export function TaskList({tasks}: TaskListProps) {
       </header>
       <div className={styles.taskList}>
         {tasks.map(task => {
-          return <Task key={task.description} task={task} />;
+          return <Task
+            key={task.description}
+            task={task}
+            onTaskCompletion={onTaskCompletion}
+            onDeleteTask={onDeleteTask}
+          />;
         })}
       </div>
     </section>
   );
 }
+
+export default memo(TaskList);

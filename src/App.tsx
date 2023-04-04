@@ -1,9 +1,9 @@
 import { PlusCircle } from 'phosphor-react';
-import { ChangeEvent, FormEvent, InvalidEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, InvalidEvent, useCallback, useEffect, useRef, useState } from 'react';
 import styles from './App.module.css';
 import { Header } from './components/Header';
 import { TaskShape } from './components/Task';
-import { TaskList } from './components/TaskList';
+import TaskList from './components/TaskList';
 
 export default function App() {
   const [tasks, setTasks] = useState<TaskShape[]>([]);
@@ -23,19 +23,33 @@ export default function App() {
     event.preventDefault();
     setTasks(previous => previous.concat([{description: createTaskDescription, isComplete: false}]));
   }
-  
+
+  const handleTaskCompletion = useCallback((taskCompleted: TaskShape) => {
+    const tasksWithUpdatedOne: TaskShape[] = tasks.map(task => task.description === taskCompleted.description ? {...task, isComplete: true } : task );
+    setTasks(tasksWithUpdatedOne);
+  }, [tasks]);
+
+  const handleDeleteTask = useCallback((taskToDelete: TaskShape) => {
+    const taskListWithoutDeletedOne = tasks.filter(task => task !== taskToDelete);
+    setTasks(taskListWithoutDeletedOne);
+  }, [tasks]);
+
   useEffect(() => {
     const tasksFromLocalStorage = JSON.parse(localStorage.getItem('TASK_LIST') || '') as TaskShape[];
     setTasks(tasksFromLocalStorage);
   }, []);
-  
+
+  const preventLocalStorageFromCleanOnRender = useRef(false);
   useEffect(() => {
-    if(createTaskDescription.length > 0) {
+    if(preventLocalStorageFromCleanOnRender.current && createTaskDescription.length > 0) {
       localStorage.setItem('TASK_LIST', JSON.stringify(tasks));
       setCreateTaskDescription('');
+    } else if (preventLocalStorageFromCleanOnRender.current) {
+      localStorage.setItem('TASK_LIST', JSON.stringify(tasks));
     }
+    preventLocalStorageFromCleanOnRender.current = true;
   }, [tasks]);
-  
+
   return (
     <div>
       <Header />
@@ -63,7 +77,7 @@ export default function App() {
           </button>
         </form>
 
-        <TaskList tasks={tasks} />
+        <TaskList tasks={tasks} onTaskCompletion={handleTaskCompletion} onDeleteTask={handleDeleteTask} />
       </main>
     </div>
   );
