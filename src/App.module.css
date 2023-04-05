@@ -53,3 +53,9 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+@media (max-width: 796px) {
+  html {
+    font-size: 87.5%;
+  }
+}
