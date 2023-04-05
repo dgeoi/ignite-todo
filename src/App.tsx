@@ -39,15 +39,15 @@ export default function App() {
     setTasks(tasksFromLocalStorage);
   }, []);
 
-  const preventLocalStorageFromCleanOnRender = useRef(false);
+  const isLocalStoragePreventedForWipe = useRef(false);
   useEffect(() => {
-    if(preventLocalStorageFromCleanOnRender.current && createTaskDescription.length > 0) {
+    if(isLocalStoragePreventedForWipe.current && createTaskDescription.length > 0) {
       localStorage.setItem('TASK_LIST', JSON.stringify(tasks));
       setCreateTaskDescription('');
-    } else if (preventLocalStorageFromCleanOnRender.current) {
+    } else if (isLocalStoragePreventedForWipe.current) {
       localStorage.setItem('TASK_LIST', JSON.stringify(tasks));
     }
-    preventLocalStorageFromCleanOnRender.current = true;
+    isLocalStoragePreventedForWipe.current = true;
   }, [tasks]);
 
   return (
