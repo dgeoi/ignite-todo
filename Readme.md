@@ -14,7 +14,7 @@ Foram abordados assuntos como:
 O projeto tem uma premissa simples: uma lista de tarefa. A qual precisa ser capaz de criar, marcar como feita e deletar tarefas.
 
 ## Design
-O design foi disponibilizado pela Rocketseat, afinal, somos apenas desenvolvedores hehe :D
+O design foi disponibilizado pela Rocketseat, afinal, somos apenas desenvolvedores hehe :D  
 A designer responsável foi a queridíssima Millena Kupsinskü Martins @millenakmartins.
 
 ## Quais as tecnologias utilizadas?
@@ -22,8 +22,8 @@ O projeto foi criado utilizando Vite.
 O framework utilizado foi o ReactJS, utilizando TypeScript como linguagem.
 
 ### Demais bibliotecas
-Phosphor Icons
-ESLint
+Phosphor Icons - https://www.npmjs.com/package/phosphor-react  
+ESLint - https://www.npmjs.com/package/eslint
 
 ## Problemáticas & Considerações
 - Achei o projeto bem completo para testar o conhecimento adquirido no primeiro módulo, que é uma introdução ao framework. Claro que tiveram alguns desafios a mais, mas nada que seja impossível.
