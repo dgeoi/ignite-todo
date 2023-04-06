@@ -3,12 +3,12 @@
 Projeto realizado como desafio do Módulo 1 na trilha ReactJS do curso Ignite, ministrado pelo Diego Fernandes @Rocketseat.
 Esse projeto tem como objetivo testar o conhecimento adquirido no decorrer do mesmo.
 Foram abordados assuntos como:
-> Componentes
-> Ciclo de vida de um componente
-> Estado
-> Propriedade
-> Imutabilidade
-> TypeScript
+> Componentes  
+> Ciclo de vida de um componente  
+> Estado  
+> Propriedade  
+> Imutabilidade  
+> TypeScript  
 
 ## O que é o projeto?
 O projeto tem uma premissa simples: uma lista de tarefa. A qual precisa ser capaz de criar, marcar como feita e deletar tarefas.
