@@ -21,8 +21,8 @@ A designer responsável foi a queridíssima Millena Kupsinskü Martins @millenak
 O projeto é em ReactJS, criado com o Vite e escrito em TypeScript.
 
 ### Demais bibliotecas
-[Phosphor Icons](https://www.npmjs.com/package/phosphor-react)  
-[ESLint](https://www.npmjs.com/package/eslint)
+- [Phosphor Icons](https://www.npmjs.com/package/phosphor-react)  
+- [ESLint](https://www.npmjs.com/package/eslint)
 
 ## Problemáticas & Considerações
 - Achei o projeto bem completo para testar o conhecimento adquirido no primeiro módulo, que é uma introdução ao framework. Claro que tiveram alguns desafios a mais, mas nada que um Stack Overflow não resolva.
